@@ -4,18 +4,16 @@ args = commandArgs(trailingOnly=TRUE)
 library(tidyverse)
 library(countrycode)
 
-# import data
-oecd <- read_csv(args[1], col_types = cols(
-  oecd_name = col_character(),
-  oecd_date = col_character()
-))
+# read data
+wdi <- read_csv(args[1])
 
-# clean
-oecd <- oecd %>% 
-  mutate(iso3 = countrycode(oecd_name, "country.name.en", "iso3c"),
-         date = lubridate::dmy(oecd_date)) %>% 
-  select(!oecd_date) %>% 
-  relocate(iso3)
+# Rename variable
+wdi <- wdi %>%
+  dplyr::rename(fert_consumption = AG.CON.FERT.ZS)
+
+# add iso3 codes
+wdi <- wdi %>% 
+  mutate(iso3c = countrycode(iso2c, "iso2c", "iso3c"))
 
 # save
-write_csv(oecd, args[2])
+write_csv(wdi, args[2])

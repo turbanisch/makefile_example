@@ -2,17 +2,10 @@
 args = commandArgs(trailingOnly=TRUE)
 
 library(tidyverse)
-library(rvest)
 
-url <- "https://web.archive.org/web/20201127165619/https://www.oecd.org/about/document/list-oecd-member-countries.htm"
-
-# download
-oecd <- read_html(url) %>% 
-  html_node(xpath = "//*[@id=\"webEditContent\"]/table[2]") %>% 
-  html_table(fill = TRUE) %>% 
-  as_tibble() %>% 
-  select(oecd_name = X2, oecd_date = X3) %>% 
-  filter(str_detect(oecd_date, "[0-9]"))
+# Gather agricultural methane emissions data from WDI
+wdi <- WDI::WDI(indicator = "AG.CON.FERT.ZS") %>% as_tibble()
 
 # save
-write_csv(oecd, args[1])
+write_csv(wdi, args[1])
+
