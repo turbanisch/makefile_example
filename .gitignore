@@ -5,6 +5,9 @@ Icon?
 Thumbs.db
 *.DS_Store
 
+# data files
+*.csv
+
 # History files
 .Rhistory
 .Rapp.history

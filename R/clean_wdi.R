@@ -1,8 +1,11 @@
+# handle inputs from Rscript execution
+args = commandArgs(trailingOnly=TRUE)
+
 library(tidyverse)
 library(countrycode)
 
 # import data
-oecd <- read_csv("data_raw/wdi.csv", col_types = cols(
+oecd <- read_csv(args[1], col_types = cols(
   oecd_name = col_character(),
   oecd_date = col_character()
 ))
@@ -15,4 +18,4 @@ oecd <- oecd %>%
   relocate(iso3)
 
 # save
-write_csv(oecd, "data_intermediate/wdi.csv")
+write_csv(oecd, args[2])

@@ -15,5 +15,4 @@ oecd <- read_html(url) %>%
   filter(str_detect(oecd_date, "[0-9]"))
 
 # save
-# write_csv(oecd, "data/raw/wdi.rds")
 write_csv(oecd, args[1])

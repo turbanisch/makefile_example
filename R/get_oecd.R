@@ -1,3 +1,6 @@
+# handle inputs from Rscript execution
+args = commandArgs(trailingOnly=TRUE)
+
 library(tidyverse)
 library(rvest)
 
@@ -12,4 +15,4 @@ oecd <- read_html(url) %>%
   filter(str_detect(oecd_date, "[0-9]"))
 
 # save
-write_csv(oecd, "data_raw/oecd.csv")
+write_csv(oecd, args[1])
