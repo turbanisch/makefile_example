@@ -6,7 +6,7 @@ final.csv: merge.R oecd.csv wdi.csv
 wdi.csv: clean_wdi.R wdi_raw.csv
 	Rscript --vanilla $^ $@
 
-oecd.csv: clean_oecd.R data_external/oecd_raw.csv
+oecd.csv: clean_oecd.R raw/oecd_raw.csv
 	Rscript --vanilla $^ $@
 
 # download
