@@ -5,8 +5,8 @@ Icon?
 Thumbs.db
 *.DS_Store
 
-# data files
-*.csv
+# data files in R/
+R/*.csv
 
 # History files
 .Rhistory
